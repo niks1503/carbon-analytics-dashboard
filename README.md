@@ -15,35 +15,35 @@ A production-ready Enterprise Carbon & ESG Analytics Dashboard tailored for the 
 The platform is designed with a decoupled, enterprise lakehouse architecture. Data is queried from Google Cloud BigQuery with Streamlit caching (`@st.cache_data`) for sub-second dashboard rendering, falling back cleanly to an anonymized synthetic dataset for local development or disconnected environments.
 
 ```mermaid
-flowchart TD
-    subgraph Data_Tier ["1. Enterprise Data Lakehouse"]
-        BQ[("GCP BigQuery Mart<br/>`anonymized_carbon_footprint_monthly`<br/>Partitioned by Date & Clustered")]
-        CSV[("Anonymized Sample CSV<br/>`data/anonymized_sample_data.csv`<br/>576 Synthetic Records across 24 Months")]
+graph TD
+    subgraph DataTier [1. Enterprise Data Lakehouse]
+        BQ[GCP BigQuery Mart: anonymized_carbon_footprint_monthly]
+        CSV[Anonymized Sample CSV: 576 Synthetic Records across 24 Months]
     end
 
-    subgraph Service_Tier ["2. Data Ingestion & Caching Layer"]
-        GCP_CLIENT["`src/gcp_client.py`<br/>• @st.cache_data(ttl=3600)<br/>• Ambient Cloud Run Auth Check<br/>• Automated Local CSV Fallback"]
-        CALC["`src/calculator.py`<br/>• kWh → kgCO2e (EPA eGRID / Regional Grid)<br/>• Flight km → kgCO2e (DEFRA RFI Models)<br/>• Cloud Hours → kgCO2e (GCP PUE & CCF)<br/>• Net Emissions & MoM Velocity"]
+    subgraph ServiceTier [2. Ingestion and Calculations]
+        GCP_CLIENT[GCP Client: src/gcp_client.py with Streamlit Caching]
+        CALC[GHG Protocol Engine: src/calculator.py Scopes 1, 2, and 3]
     end
 
-    subgraph Intelligence_Tier ["3. GenAI Executive Insights"]
-        GENAI["`src/genai_insights.py`<br/>• google-genai SDK (gemini-3.8-flash)<br/>• C-Suite Executive Briefing<br/>• What-If Scenario Decarbonization Simulator<br/>• Statistical Fallback Engine"]
+    subgraph IntelligenceTier [3. GenAI Executive Insights]
+        GENAI[Gemini 3.8 Flash: src/genai_insights.py with google-genai SDK]
     end
 
-    subgraph Presentation_Tier ["4. Executive BI Dashboard (app.py)"]
-        UI["Streamlit Executive BI Layer<br/>• Amex Corporate Design System<br/>• Multi-Select Filters (Region, Dept, Date, Scope)<br/>• KPI Tiles: Gross MT, MoM %, Offsets, Net MT<br/>• Plotly Visuals: Trendline, Scope Donut, Drivers<br/>• Interactive Conversion Sandbox"]
+    subgraph PresentationTier [4. Executive BI Dashboard]
+        UI[Streamlit Executive BI Layer: app.py with Amex Styling]
     end
 
-    subgraph Deployment_Tier ["5. Production Containerization"]
-        DOCKER["Docker Container<br/>• Python 3.11-slim Base<br/>• Non-Root Security (appuser)<br/>• Healthcheck Endpoint (/_stcore/health)"]
-        CLOUD_RUN["Google Cloud Run<br/>• Serverless Autoscaling<br/>• Dynamic Port Binding ($PORT: 8080)"]
+    subgraph DeploymentTier [5. Cloud Run Containerization]
+        DOCKER[Docker Container: Python 3.11-slim]
+        CLOUD_RUN[Google Cloud Run: Serverless Autoscaling on Port 8080]
     end
 
-    BQ -.-> GCP_CLIENT
-    CSV -.-> GCP_CLIENT
+    BQ --> GCP_CLIENT
+    CSV --> GCP_CLIENT
     GCP_CLIENT --> CALC
     CALC --> UI
-    UI --> GENAI
+    UI <--> GENAI
     UI --> DOCKER
     DOCKER --> CLOUD_RUN
 ```
