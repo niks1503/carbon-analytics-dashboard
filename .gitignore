@@ -1,0 +1,42 @@
+# Secrets and Environment Variables
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.p12
+*.json_credentials
+*service_account*.json
+client_secrets*.json
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE & Editor Files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Streamlit Local Cache
+.streamlit/secrets.toml
