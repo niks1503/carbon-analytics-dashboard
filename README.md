@@ -1,10 +1,12 @@
 # Carbon & ESG Footprint Analytics Dashboard
 
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.65+-FF4B4B.svg)](https://streamlit.io)
+[![CI](https://github.com/niks1503/carbon-analytics-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/niks1503/carbon-analytics-dashboard/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.65+-FF4B4B.svg)](https://streamlit.io)
 [![Google Cloud](https://img.shields.io/badge/GCP-BigQuery%20%7C%20Cloud%20Run-4285F4.svg)](https://cloud.google.com/)
 [![Gemini](https://img.shields.io/badge/GenAI-Gemini%203.8%20Flash-8E75C2.svg)](https://ai.google.dev/)
 [![GHG Protocol](https://img.shields.io/badge/Standard-GHG%20Protocol%20Scopes%201%2C%202%2C%203-00875A.svg)](https://ghgprotocol.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 A production-ready Enterprise Carbon & ESG Analytics Dashboard tailored for the **Scaled Analytics & BI** function at **American Express**. Built to ingest, calculate, model, and visualize corporate greenhouse gas emissions across **Scope 1 (Direct)**, **Scope 2 (Electricity)**, and **Scope 3 (Value Chain: Business Flights, Cloud Infrastructure)** with automated C-Suite briefings powered by Google Gemini 3.8 Flash.
 
@@ -138,18 +140,21 @@ pip install -r requirements.txt
 
 ### 2. Configure Environment Variables (Optional)
 
-Create a `.env` file in the root directory (never committed to git):
+Copy the provided template and fill in your values:
 
-```env
-# Optional: Live Google Gemini API Key for dynamic C-suite briefings
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# Optional: Google Cloud BigQuery configuration
-GCP_PROJECT_ID=amex-analytics-prod
-BIGQUERY_DATASET=esg_carbon_mart
-BIGQUERY_TABLE=anonymized_carbon_footprint_monthly
-GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json
+```bash
+cp .env.example .env
 ```
+
+Key variables in `.env`:
+
+| Variable | Required | Description |
+|---|---|---|
+| `GEMINI_API_KEY` | Optional | Gemini API key for live C-suite briefings |
+| `GCP_PROJECT_ID` | Optional | GCP project for BigQuery live data |
+| `BIGQUERY_DATASET` | Optional | BigQuery dataset name |
+| `BIGQUERY_TABLE` | Optional | BigQuery table name |
+| `GOOGLE_APPLICATION_CREDENTIALS` | Optional | Path to GCP service account JSON |
 
 > **Note:** If `GEMINI_API_KEY` or GCP credentials are not configured, the dashboard automatically activates the built-in deterministic analytical briefing engine and local sample dataset.
 
