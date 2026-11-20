@@ -1,4 +1,4 @@
-"""GCP BigQuery integration module for Amex Scaled Analytics & BI.
+"""GCP BigQuery integration module for Scaled Analytics & BI.
 
 Implements BigQuery connection handling with Streamlit caching (@st.cache_data),
 graceful local CSV fallback when GCP credentials are not supplied,
@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 LOCAL_DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "anonymized_sample_data.csv"
 
 # Default GCP BigQuery Configuration
-DEFAULT_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "amex-analytics-prod")
+DEFAULT_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "esg-analytics-prod")
 DEFAULT_DATASET_ID = os.getenv("BIGQUERY_DATASET", "esg_carbon_mart")
 DEFAULT_TABLE_ID = os.getenv("BIGQUERY_TABLE", "anonymized_carbon_footprint_monthly")
 
@@ -175,7 +175,7 @@ def get_bigquery_schema_ddl(
     table_id: str = DEFAULT_TABLE_ID,
 ) -> str:
     """Generate production BigQuery DDL for enterprise provisioning."""
-    return f"""-- Amex Scaled Analytics: BigQuery ESG Mart Table Provisioning
+    return f"""-- Scaled Analytics: BigQuery ESG Mart Table Provisioning
 CREATE OR REPLACE TABLE `{project_id}.{dataset_id}.{table_id}`
 (
   record_id STRING NOT NULL OPTIONS(description="Unique scrubbed identifier for partition"),

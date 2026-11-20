@@ -1,4 +1,4 @@
-"""American Express | Scaled Analytics & BI.
+"""Carbon & ESG Analytics | Scaled Analytics & BI.
 
 Carbon & ESG Footprint Analytics Dashboard
 Production-ready Enterprise GHG Protocol Scopes 1, 2 & 3 Analytics Platform.
@@ -40,7 +40,7 @@ from src.visualizations import (
 # ==============================================================================
 
 st.set_page_config(
-    page_title="Amex ESG Analytics | Carbon Footprint BI",
+    page_title="ESG Analytics | Carbon Footprint BI",
     page_icon="🌍",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -52,7 +52,7 @@ def render_plotly_chart(fig: go.Figure, key: str | None = None) -> None:
     st.plotly_chart(fig, width="stretch", key=key)
 
 
-# Custom Enterprise CSS for American Express Design Language
+# Custom enterprise CSS design language
 CUSTOM_CSS = """
 <style>
     /* Global Typography & Font Family */
@@ -62,8 +62,8 @@ CUSTOM_CSS = """
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
-    /* Amex Enterprise Header Banner */
-    .amex-header {
+    /* Enterprise header banner */
+    .esg-header {
         background: linear-gradient(135deg, #00173D 0%, #002663 50%, #004085 100%);
         border-radius: 12px;
         padding: 24px 32px;
@@ -75,14 +75,14 @@ CUSTOM_CSS = """
         align-items: center;
         border-left: 6px solid #00A3E0;
     }
-    .amex-title {
+    .esg-title {
         font-size: 26px;
         font-weight: 700;
         letter-spacing: -0.5px;
         margin: 0;
         color: #FFFFFF;
     }
-    .amex-subtitle {
+    .esg-subtitle {
         font-size: 14px;
         color: #93C5FD;
         margin-top: 4px;
@@ -142,10 +142,10 @@ source_label = data_metadata.get("status", "Active")
 
 st.markdown(
     f"""
-    <div class="amex-header">
+    <div class="esg-header">
         <div>
-            <div class="amex-title">American Express | Global ESG & Scaled Analytics Platform</div>
-            <div class="amex-subtitle">Carbon & ESG Footprint Analytics Dashboard &mdash; GHG Protocol Scopes 1, 2 & 3</div>
+            <div class="esg-title">Global ESG & Scaled Analytics Platform</div>
+            <div class="esg-subtitle">Carbon & ESG Footprint Analytics Dashboard &mdash; GHG Protocol Scopes 1, 2 & 3</div>
         </div>
         <div>
             <div class="status-badge">
@@ -667,7 +667,7 @@ with tab_data:
         st.download_button(
             label="📥 Export Filtered ESG Mart (CSV)",
             data=csv_export,
-            file_name=f"amex_esg_carbon_mart_{datetime.date.today()}.csv",
+            file_name=f"esg_carbon_mart_{datetime.date.today()}.csv",
             mime="text/csv",
             type="primary",
             key="btn_download_csv",

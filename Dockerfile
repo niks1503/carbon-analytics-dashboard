@@ -1,5 +1,5 @@
 # ==============================================================================
-# Production Dockerfile for Amex Carbon & ESG Analytics Dashboard
+# Production Dockerfile for Carbon & ESG Analytics Dashboard
 # Optimized for Google Cloud Run Deployment
 # ==============================================================================
 

@@ -8,7 +8,7 @@
 [![GHG Protocol](https://img.shields.io/badge/Standard-GHG%20Protocol%20Scopes%201%2C%202%2C%203-00875A.svg)](https://ghgprotocol.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-A production-ready Enterprise Carbon & ESG Analytics Dashboard tailored for the **Scaled Analytics & BI** function at **American Express**. Built to ingest, calculate, model, and visualize corporate greenhouse gas emissions across **Scope 1 (Direct)**, **Scope 2 (Electricity)**, and **Scope 3 (Value Chain: Business Flights, Cloud Infrastructure)** with automated C-Suite briefings powered by Google Gemini 3.8 Flash.
+A production-ready Enterprise Carbon & ESG Analytics Dashboard built for an enterprise **Scaled Analytics & BI** function. Built to ingest, calculate, model, and visualize corporate greenhouse gas emissions across **Scope 1 (Direct)**, **Scope 2 (Electricity)**, and **Scope 3 (Value Chain: Business Flights, Cloud Infrastructure)** with automated C-Suite briefings powered by Google Gemini 3.8 Flash.
 
 ---
 
@@ -33,7 +33,7 @@ graph TD
     end
 
     subgraph PresentationTier [4. Executive BI Dashboard]
-        UI[Streamlit Executive BI Layer: app.py with Amex Styling]
+        UI[Streamlit Executive BI Layer: app.py with custom styling]
     end
 
     subgraph DeploymentTier [5. Cloud Run Containerization]
@@ -105,7 +105,7 @@ graph TD
 │   ├── gcp_client.py              # BigQuery integration with @st.cache_data & CSV fallback
 │   ├── genai_insights.py          # Gemini 3.8 Flash executive briefings & scenario engine
 │   ├── generate_sample_data.py    # Deterministic synthetic data generation utility
-│   └── visualizations.py          # Amex-styled Plotly charts
+│   └── visualizations.py          # Styled Plotly charts
 └── tests/
     ├── test_app.py                # Streamlit AppTest integration verification
     ├── test_calculator.py         # Unit tests for carbon conversion functions
@@ -182,13 +182,13 @@ The application will be accessible at `http://localhost:8501`.
 
 ```bash
 # Build the production Docker image
-docker build -t amex-esg-dashboard:latest .
+docker build -t carbon-esg-dashboard:latest .
 
 # Run container locally on port 8080
 docker run -p 8080:8080 \
   -e PORT=8080 \
   -e GEMINI_API_KEY="your_api_key" \
-  amex-esg-dashboard:latest
+  carbon-esg-dashboard:latest
 ```
 
 Visit `http://localhost:8080` to interact with the containerized application.
@@ -200,11 +200,11 @@ Visit `http://localhost:8080` to interact with the containerized application.
 gcloud config set project YOUR_GCP_PROJECT_ID
 
 # 2. Build and push image to Google Artifact Registry
-gcloud builds submit --tag gcr.io/YOUR_GCP_PROJECT_ID/amex-esg-dashboard:latest
+gcloud builds submit --tag gcr.io/YOUR_GCP_PROJECT_ID/carbon-esg-dashboard:latest
 
 # 3. Deploy to Cloud Run with public/internal access and 1Gi memory
-gcloud run deploy amex-esg-dashboard \
-  --image gcr.io/YOUR_GCP_PROJECT_ID/amex-esg-dashboard:latest \
+gcloud run deploy carbon-esg-dashboard \
+  --image gcr.io/YOUR_GCP_PROJECT_ID/carbon-esg-dashboard:latest \
   --platform managed \
   --region us-central1 \
   --allow-unauthenticated \
@@ -218,7 +218,7 @@ gcloud run deploy amex-esg-dashboard \
 
 ## 🔒 Data Governance & Anonymization
 
-In strict compliance with American Express enterprise data governance and cybersecurity policies:
+Following enterprise data governance and cybersecurity best practices:
 1. **Zero Proprietary Data**: All data contained in `data/anonymized_sample_data.csv` is completely synthetic, generated programmatically using standard statistical normal distributions with seasonal noise.
 2. **Zero Internal Customer Data**: No customer accounts, cardholder data, vendor identifiers, or proprietary financial metrics are included.
 3. **Secrets Protection**: All keys, `.env` files, and credentials are intentionally excluded via `.gitignore`.

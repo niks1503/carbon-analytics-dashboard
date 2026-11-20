@@ -52,7 +52,7 @@ def generate_executive_insights(
         
         prompt = _build_executive_prompt(metrics_summary, custom_scenario)
         system_instruction = (
-            "You are the Senior Executive ESG & Scaled Analytics Advisor for American Express. "
+            "You are the Senior Executive ESG & Scaled Analytics Advisor for a large enterprise. "
             "You provide rigorous, data-driven, C-suite ready analysis of greenhouse gas emissions "
             "(GHG Protocol Scopes 1, 2, and 3). Frame your insights with financial acumen, "
             "operational risk management, Science-Based Targets (SBTi), and actionable decarbonization levers. "
