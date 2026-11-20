@@ -1,7 +1,12 @@
 """Unit tests for src/gcp_client.py BigQuery client and CSV fallback."""
 
 import pandas as pd
-from src.gcp_client import _clean_and_cast_dataframe, fetch_carbon_data, get_bigquery_schema_ddl
+
+from src.gcp_client import (
+    _clean_and_cast_dataframe,
+    fetch_carbon_data,
+    get_bigquery_schema_ddl,
+)
 
 
 def test_fetch_carbon_data_fallback():

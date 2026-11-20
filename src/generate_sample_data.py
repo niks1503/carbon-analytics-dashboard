@@ -1,23 +1,22 @@
 """Script to generate realistic, scrubbed, anonymized sample ESG data."""
 
 import csv
-from datetime import date
-from pathlib import Path
 import random
 import sys
+from pathlib import Path
 
 # Ensure repository root is in python path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from src.calculator import (
-    kwh_to_kg_co2e,
-    flight_km_to_kg_co2e,
-    cloud_compute_hours_to_kg_co2e,
-    fuel_liters_to_kg_co2e,
+from src.calculator import (  # noqa: E402 (needs the sys.path setup above)
     calculate_gross_emissions_mt,
     calculate_net_emissions_mt,
+    cloud_compute_hours_to_kg_co2e,
+    flight_km_to_kg_co2e,
+    fuel_liters_to_kg_co2e,
+    kwh_to_kg_co2e,
 )
 
 DEPARTMENTS = [
@@ -45,7 +44,7 @@ for year in [2024, 2025]:
 def generate_dataset():
     random.seed(42)  # Deterministic reproducibility
     rows = []
-    
+
     # Department headcount and profile baselines
     dept_profiles = {
         "Global Commercial Services": {"fte": (2500, 3200), "spend_m": (45.0, 65.0), "flight_heavy": True, "cloud_heavy": False},
@@ -75,7 +74,7 @@ def generate_dataset():
             prof = dept_profiles[dept]
             for reg in REGIONS:
                 rw = region_weights[reg]
-                
+
                 # Scaled activity metrics
                 base_fte = int(random.uniform(*prof["fte"]) * rw)
                 base_spend = round(random.uniform(*prof["spend_m"]) * rw, 2)

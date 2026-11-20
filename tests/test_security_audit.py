@@ -11,9 +11,8 @@ Scans all project source code, configurations, data files, and documentation for
 from __future__ import annotations
 
 import csv
-from pathlib import Path
 import re
-import pytest
+from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -84,7 +83,7 @@ def test_no_hardcoded_secrets_in_repository():
                 rel_path = file_path.relative_to(PROJECT_ROOT)
                 violations.append(f"[{secret_name}] found in {rel_path}: {match[:10]}...")
 
-    assert not violations, f"Security audit detected potential hardcoded secrets:\n" + "\n".join(violations)
+    assert not violations, "Security audit detected potential hardcoded secrets:\n" + "\n".join(violations)
 
 
 def test_no_pii_or_cardholder_data_in_dataset():

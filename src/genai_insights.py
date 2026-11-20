@@ -49,7 +49,7 @@ def generate_executive_insights(
 
     try:
         client = genai.Client(api_key=api_key)
-        
+
         prompt = _build_executive_prompt(metrics_summary, custom_scenario)
         system_instruction = (
             "You are the Senior Executive ESG & Scaled Analytics Advisor for a large enterprise. "
@@ -127,7 +127,6 @@ def generate_deterministic_executive_briefing(
     """Generate high-fidelity, deterministic analytical briefing when API key is unavailable."""
     total_gross = metrics.get("total_gross_mt", 0.0)
     total_net = metrics.get("total_net_mt", 0.0)
-    offsets = metrics.get("total_offsets_mt", 0.0)
     mom_pct = metrics.get("mom_change_pct", 0.0)
     scope1_pct = metrics.get("scope1_pct", 0.0)
     scope2_pct = metrics.get("scope2_pct", 0.0)

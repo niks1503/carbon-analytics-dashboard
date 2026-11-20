@@ -79,12 +79,11 @@ def fetch_carbon_data(
 
     try:
         from google.cloud import bigquery
-        from google.auth.exceptions import DefaultCredentialsError
 
         # Initialize BigQuery Client
         client = bigquery.Client(project=project_id)
 
-        
+
         query = query_override or f"""
             SELECT
                 record_id,
@@ -112,7 +111,7 @@ def fetch_carbon_data(
             FROM `{project_id}.{dataset_id}.{table_id}`
             ORDER BY date ASC
         """
-        
+
         logger.info(f"Executing BigQuery query against {project_id}.{dataset_id}.{table_id}")
         query_job = client.query(query)
         df = query_job.to_dataframe()
@@ -148,7 +147,7 @@ def _clean_and_cast_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     if "date" in df.columns:
         df["date"] = pd.to_datetime(df["date"])
-    
+
     numeric_cols = [
         "fte_headcount", "operational_spend_m_usd", "electricity_kwh",
         "renewable_energy_pct", "flight_km", "cloud_compute_hours", "fuel_liters",

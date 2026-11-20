@@ -1,8 +1,8 @@
 """Unit tests for src/calculator.py carbon conversion functions."""
 
 import pytest
+
 from src.calculator import (
-    GRID_EMISSION_FACTORS,
     calculate_carbon_intensity,
     calculate_gross_emissions_mt,
     calculate_mom_change,
@@ -11,9 +11,7 @@ from src.calculator import (
     cloud_compute_hours_to_kg_co2e,
     flight_km_to_kg_co2e,
     fuel_liters_to_kg_co2e,
-    kg_to_metric_tons,
     kwh_to_kg_co2e,
-    metric_tons_to_kg,
 )
 
 

@@ -15,9 +15,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from src.calculator import (
-    calculate_gross_emissions_mt,
     calculate_mom_change,
-    calculate_net_emissions_mt,
     calculate_scope_breakdown,
     cloud_compute_hours_to_kg_co2e,
     flight_km_to_kg_co2e,
@@ -57,7 +55,7 @@ CUSTOM_CSS = """
 <style>
     /* Global Typography & Font Family */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    
+
     html, body, [class*="css"] {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
@@ -512,7 +510,7 @@ with tab_genai:
             st.success("✅ GEMINI_API_KEY detected in environment.")
         else:
             st.info("ℹ️ No GEMINI_API_KEY environment variable detected. Using built-in analytical briefing engine. You can paste a Gemini key below to run live.")
-        
+
         user_api_key = st.text_input(
             "Gemini API Key Override (Optional)",
             type="password",
